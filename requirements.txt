@@ -1,0 +1,12 @@
+# Actual Dependencies
+-e .
+
+# Test Dependencies
+nose
+coverage
+mock
+sphinx
+python-coveralls
+bumpversion
+tox
+yanc
