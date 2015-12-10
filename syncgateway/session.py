@@ -1,14 +1,11 @@
 import json
 
-import errors
-import endpoint
-import urls
-
+from syncgateway import (errors, endpoint, urls)
 
 class SessionEndpoint(endpoint.Endpoint):
 
     def get(self, session_id):
-        query_url = urls.session_url(urls.base_url(self.database), session_id)
+        query_url = urls.session_url(self.database_url, session_id)
         response = self.session.get(query_url)
 
         if response.status_code == 200:
@@ -22,7 +19,7 @@ class SessionEndpoint(endpoint.Endpoint):
             )
 
     def create(self, username, ttl=None):
-        query_url = urls.sessions_url(urls.base_url(self.database))
+        query_url = urls.sessions_url(self.database_url)
 
         SECONDS_IN_DAY = 86400
         body = {
@@ -40,7 +37,7 @@ class SessionEndpoint(endpoint.Endpoint):
 
     def delete(self, session_id=None, username=None):
         query_url = urls.session_delete_url(
-            urls.base_url(self.database), session_id, username
+           self.database_url, session_id, username
         )
         response = self.session.delete(query_url)
         if response.status_code > 200:
@@ -48,3 +45,5 @@ class SessionEndpoint(endpoint.Endpoint):
                 response.status_code,
                 response.text
             )
+    
+    

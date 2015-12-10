@@ -2,11 +2,11 @@
 -e .
 
 # Test Dependencies
-nose
-coverage
+pytest
+pytest-cov
+coveralls
 mock
+requests-mock
 sphinx
-python-coveralls
 bumpversion
 tox
-yanc

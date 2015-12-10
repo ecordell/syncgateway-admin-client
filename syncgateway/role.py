@@ -1,14 +1,12 @@
 import json
 
-import errors
-import endpoint
-import urls
+from syncgateway import (errors, endpoint, urls)
 
 
 class RoleEndpoint(endpoint.Endpoint):
 
     def get_list(self):
-        query_url = urls.roles_url(urls.base_url(self.database))
+        query_url = urls.roles_url(self.database_url)
         response = self.session.get(query_url)
 
         if response.status_code == 200:
@@ -20,7 +18,7 @@ class RoleEndpoint(endpoint.Endpoint):
             )
 
     def get(self, role):
-        query_url = urls.role_url(urls.base_url(self.database), role)
+        query_url = urls.role_url(self.database_url, role)
         response = self.session.get(query_url)
 
         if response.status_code == 200:
@@ -32,7 +30,7 @@ class RoleEndpoint(endpoint.Endpoint):
             )
 
     def create(self, name, admin_channels=None):
-        query_url = urls.roles_url(urls.base_url(self.database))
+        query_url = urls.roles_url(self.database_url)
         body = self._role_body(name, admin_channels)
         response = self.session.post(query_url, data=json.dumps(body))
 
@@ -47,7 +45,7 @@ class RoleEndpoint(endpoint.Endpoint):
             )
 
     def add_or_update(self, name, admin_channels=None):
-        query_url = urls.role_url(urls.base_url(self.database), name)
+        query_url = urls.role_url(self.database_url, name)
         body = self._role_body(name, admin_channels)
         response = self.session.put(query_url, data=json.dumps(body))
 
@@ -59,7 +57,7 @@ class RoleEndpoint(endpoint.Endpoint):
             )
 
     def delete(self, role):
-        query_url = urls.role_url(urls.base_url(self.database), role)
+        query_url = urls.role_url(self.database_url, role)
         response = self.session.delete(query_url)
         if response.status_code > 200:
             raise errors.UnexpectedResponseError(

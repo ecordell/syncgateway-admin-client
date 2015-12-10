@@ -1,4 +1,4 @@
-import errors
+from syncgateway import errors
 
 
 def session_url(base_url, session_id):
