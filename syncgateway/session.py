@@ -2,6 +2,7 @@ import json
 
 from syncgateway import (errors, endpoint, urls)
 
+
 class SessionEndpoint(endpoint.Endpoint):
 
     def get(self, session_id):
@@ -37,7 +38,7 @@ class SessionEndpoint(endpoint.Endpoint):
 
     def delete(self, session_id=None, username=None):
         query_url = urls.session_delete_url(
-           self.database_url, session_id, username
+            self.database_url, session_id, username
         )
         response = self.session.delete(query_url)
         if response.status_code > 200:
@@ -45,5 +46,3 @@ class SessionEndpoint(endpoint.Endpoint):
                 response.status_code,
                 response.text
             )
-    
-    

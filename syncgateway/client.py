@@ -20,10 +20,11 @@ class Client(object):
 
     def _configure_endpoints(self):
         self.sessions = session.SessionEndpoint(
-            self._url, self._database, self._session
-        )
-        self.users = user.UserEndpoint(self._url, self._database, self._session)
-        self.roles = role.RoleEndpoint(self._url, self._database, self._session)
+            self._url, self._database, self._session)
+        self.users = user.UserEndpoint(
+            self._url, self._database, self._session)
+        self.roles = role.RoleEndpoint(
+            self._url, self._database, self._session)
 
     @property
     def database(self):

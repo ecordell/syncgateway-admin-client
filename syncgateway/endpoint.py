@@ -7,7 +7,7 @@ class Endpoint(object):
         self.url = url
         self.database = database
         self.session = session
-    
+
     @property
     def database_url(self):
         return urls.base_url(self.url, self.database)
