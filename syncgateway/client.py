@@ -1,8 +1,6 @@
 import requests
 
-import user
-import session
-import role
+from syncgateway import (session, user, role)
 
 
 class Client(object):
@@ -22,10 +20,10 @@ class Client(object):
 
     def _configure_endpoints(self):
         self.sessions = session.SessionEndpoint(
-            self.url, self.database, self.session
+            self._url, self._database, self._session
         )
-        self.users = user.UserEndpoint(self.url, self.database, self.session)
-        self.roles = role.RoleEndpoint(self.url, self.database, self.session)
+        self.users = user.UserEndpoint(self._url, self._database, self._session)
+        self.roles = role.RoleEndpoint(self._url, self._database, self._session)
 
     @property
     def database(self):

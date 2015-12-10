@@ -1,14 +1,12 @@
 import json
 
-import errors
-import endpoint
-import urls
+from syncgateway import (errors, endpoint, urls)
 
 
 class UserEndpoint(endpoint.Endpoint):
 
     def exists(self, username):
-        query_url = urls.user_url(urls.base_url(self.database), username)
+        query_url = urls.user_url(self.database_url, username)
         response = self.session.get(query_url)
 
         if response.status_code == 200:
@@ -22,7 +20,7 @@ class UserEndpoint(endpoint.Endpoint):
             )
 
     def get_list(self):
-        query_url = urls.users_url(urls.base_url(self.database))
+        query_url = urls.users_url(self.database_url)
         response = self.session.get(query_url)
 
         if response.status_code == 200:
@@ -34,7 +32,7 @@ class UserEndpoint(endpoint.Endpoint):
             )
 
     def get(self, username):
-        query_url = urls.user_url(urls.base_url(self.database), username)
+        query_url = urls.user_url(self.database_url, username)
         response = self.session.get(query_url)
 
         if response.status_code == 200:
@@ -55,7 +53,7 @@ class UserEndpoint(endpoint.Endpoint):
                       admin_roles=None,
                       email=None,
                       disabled=None):
-        query_url = urls.user_url(urls.base_url(self.database), username)
+        query_url = urls.user_url(self.database_url, username)
 
         body = self._user_body(
             username,
@@ -84,7 +82,7 @@ class UserEndpoint(endpoint.Endpoint):
                admin_roles=None,
                email=None,
                disabled=None):
-        query_url = urls.users_url(urls.base_url(self.database))
+        query_url = urls.users_url(self.database_url)
 
         body = self._user_body(
             username,
@@ -108,7 +106,7 @@ class UserEndpoint(endpoint.Endpoint):
             )
 
     def delete(self, username):
-        query_url = urls.user_url(urls.base_url(self.database), username)
+        query_url = urls.user_url(self.database_url, username)
         response = self.session.delete(query_url)
         if response.status_code > 200:
             raise errors.UnexpectedResponseError(
