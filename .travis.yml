@@ -18,6 +18,7 @@ env:
 - TOX_ENV=coverage
 after_success: coveralls
 deploy:
+  edge: true
   provider: pypi
   user: cordell.evan@gmail.com
   password:
