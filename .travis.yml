@@ -26,3 +26,5 @@ deploy:
   on:
     tags: true
     repo: ecordell/syncgateway-admin-client
+    distributions: "sdist bdist_wheel"
+    condition: $TOX_ENV = py35 # only deploy once
