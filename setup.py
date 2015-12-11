@@ -14,7 +14,7 @@ long_description = long_description.strip().split('split here', 2)[1][:-12]
 
 setup(
     name='syncgateway',
-    version="0.1.1",
+    version="0.1.2",
     description='Couchbase Sync Gateway Admin REST API Client',
     author='Evan Cordell',
     author_email='cordell.evan@gmail.com',
