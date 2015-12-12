@@ -15,7 +15,7 @@ Installation
 
 Install SyncGateway Admin REST Client by running:
 
-    pip install syncgateway-admin
+    pip install syncgateway
 
 Contribute
 ----------
